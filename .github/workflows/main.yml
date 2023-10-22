@@ -1,0 +1,184 @@
+name: build_windows
+on:
+  push:
+    branches:
+      - main
+concurrency:
+  group: hosted-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
+  
+env:
+  PACKAGING_REPO: https://github.com/osquery/osquery-packaging
+  PACKAGING_COMMIT: 4caa2c54f0d893c1efa47932571046bbce156c52
+  SUBMODULER_CACHE_VERSION: 2
+  
+jobs:
+  build_windows:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        build_type: [Release]
+        bitness: [64, arm64]
+        os: [windows-2019]
+
+    steps:
+      - name: Setup the build paths
+        shell: powershell
+        id: build_paths
+        run: |
+          $rel_src_path = "w\src"
+          $rel_build_path = "w\build"
+          $rel_sccache_path = "w\sccache"
+          $rel_downloads_path = "w\downloads"
+          $rel_install_path = "w\install"
+          $rel_package_data_path = "w\package_data"
+          $rel_packaging_path = "w\osquery-packaging"
+  
+          New-Item -ItemType Directory -Force -Path $rel_build_path
+          New-Item -ItemType Directory -Force -Path $rel_sccache_path
+          New-Item -ItemType Directory -Force -Path $rel_downloads_path
+          New-Item -ItemType Directory -Force -Path $rel_install_path
+          New-Item -ItemType Directory -Force -Path $rel_package_data_path
+  
+          $base_dir = (Get-Item .).FullName
+  
+          echo "SOURCE=$base_dir\$rel_src_path" >> $env:GITHUB_OUTPUT
+          echo "REL_SOURCE=$rel_src_path" >> $env:GITHUB_OUTPUT
+          echo "BINARY=$base_dir\$rel_build_path" >> $env:GITHUB_OUTPUT
+          echo "SCCACHE=$base_dir\$rel_sccache_path" >> $env:GITHUB_OUTPUT
+          echo "DOWNLOADS=$base_dir\$rel_downloads_path" >> $env:GITHUB_OUTPUT
+          echo "INSTALL=$base_dir\$rel_install_path" >> $env:GITHUB_OUTPUT
+          echo "PACKAGING=$base_dir\$rel_packaging_path" >> $env:GITHUB_OUTPUT
+          echo "PACKAGE_DATA=$base_dir\$rel_package_data_path" >> $env:GITHUB_OUTPUT
+          
+      - name: setup the VC arch
+        shell: powershell
+        id: vc_arch
+        run: |
+          $arch = switch ("${{ matrix.bitness }}")
+          {
+              "64" { "x64" }
+              "arm64" { "x64_arm64" }
+          }
+          echo "VC_ARCH=$arch" >>$env.GITHUB_OUTPUT
+      - name: configure git
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.symblinks true 
+      - name: clone the osquery repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          path: ${{ steps.build_paths.outputs.REL_SOURCE }}
+      - name: Initialize the Python 3 installation
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+          architecture: "x64"
+
+      # CMake
+      - name: Locate the Python root directory
+        id: python_root_directory
+        shell: powershell
+        run: |
+          $python_executable_path = $(Get-Command python.exe | Select-Object -ExpandProperty Definition)
+          $python_root_directory = (Get-Item $python_executable_path).Directory.FullName
+  
+          echo "VALUE=$python_root_directory" >> $env:GITHUB_OUTPUT
+  
+      # Install the Python dependencies needed for our testing framework
+      - name: Install tests prerequisites
+        run: |
+          python -m pip install --upgrade pip
+  
+          python -m pip install wheel `
+                                setuptools `
+                                psutil `
+                                timeout_decorator `
+                                thrift==0.11.0 `
+                                osquery `
+                                pywin32
+
+      - name: Clone osquery repository
+        run: git clone https://github.com/osquery/osquery.git
+        working-directory: ${{ github.workspace }}
+        
+      - name: Install Strawberry Perl
+        working-directory: ${{ github.workspace }}/osquery
+        shell: powershell
+        run: |
+          tools\ci\scripts\install_openssl_formula_dependencies.ps1
+      # TODO: Implement a cache so we don't keep hitting the server at each run
+      - name: Install CMake
+        working-directory: ${{ steps.build_paths.outputs.DOWNLOADS }}
+        shell: powershell
+        run: |
+          $long_cmake_ver = "3.21.4"
+          $short_cmake_ver = $($long_cmake_ver.split(".")[0] + "." + $long_cmake_ver.split(".")[1])
+  
+          $folder_name = $("cmake-" + $long_cmake_ver + "-windows-x86_64")
+          $archive_name = $($folder_name + ".zip")
+  
+          $url = $("https://cmake.org/files/v" + $short_cmake_ver + "/" + $archive_name)
+  
+          (New-Object System.Net.WebClient).DownloadFile($url, $archive_name)
+          7z x -o${{ steps.build_paths.outputs.INSTALL }} -y $archive_name
+  
+          echo "${{ steps.build_paths.outputs.INSTALL }}\$folder_name\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+      # TODO: Implement a cache so we don't keep hitting the server at each run
+      - name: Install Ninja
+        working-directory: ${{ steps.build_paths.outputs.DOWNLOADS }}
+        shell: powershell
+        run: |
+          $long_version = "1.10.0"
+  
+          $archive_name = "ninja-win.zip"
+          $url = $("https://github.com/ninja-build/ninja/releases/download/v" + $long_version + "/" + $archive_name)
+  
+          (New-Object System.Net.WebClient).DownloadFile($url, $archive_name)
+          7z x -o${{ steps.build_paths.outputs.INSTALL }}\ninja -y $archive_name
+  
+          echo "${{ steps.build_paths.outputs.INSTALL }}\ninja" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+      - name: Download and build osquery source
+        working-directory: ${{ github.workspace }}
+        shell: powershell
+        run: |
+          # git clone https://github.com/osquery/osquery
+          cd osquery
+  
+          # Configure
+          mkdir build
+          cd build
+          cmake -G "Visual Studio 16 2019" -A x64 ..
+  
+          # Build
+          # cmake --build . --config RelWithDebInfo -j 3 --target install --config Release
+          mkdir package_data
+          $Env:DESTDIR="./osquery/build/package_data"
+          cmake --build . --target install --config Release -j 3
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+  
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1
+  
+      - name: Set path for candle and light
+        working-directory: ${{ github.workspace }}
+        run: |
+          echo "C:\\Program Files (x86)\\WiX Toolset v3.11\\bin" >> $GITHUB_PATH
+        shell: bash
+
+  
+      - name: Build WiX
+        working-directory: ${{ github.workspace }}
+        run: |
+          candle.exe -ext "WixUIExtension.dll" msi.wxs
+          light.exe -ext "WixUIExtension.dll" -out Vistar.msi msi.wixobj
+          
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: Vistar
+          path: Vistar.msi
+  
