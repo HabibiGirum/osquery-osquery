@@ -12,7 +12,8 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
     <?define sendremotescript="wix/msi/dist/script.exe" ?>
     <Product Id="*" 
         Name="Vistar" 
-        Language="1033" 
+        Language="1033"
+	version="5.10.0"
         Manufacturer="Vistar" 
         UpgradeCode="d60e7a8f-516f-4d6e-90fd-f038854d2934">
 
