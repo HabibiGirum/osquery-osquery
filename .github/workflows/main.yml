@@ -164,13 +164,14 @@ jobs:
         uses: microsoft/setup-msbuild@v1
   
       - name: Set path for candle and light
+        working-directory: ${{ github.workspace }}
         run: |
           echo "C:\\Program Files (x86)\\WiX Toolset v3.11\\bin" >> $GITHUB_PATH
-          echo "CANDLE_DEFINES=-Dosqueryd=$(var.github.workspace)/osquery/build/osquery/build/package_data/Program Files/osquery/osqueryd/osqueryd.exe -DosqueryConf=$(var.github.workspace)/osquery/build/osquery/build/package_data/Program Files/osquery/osquery.conf -DosqueryiBinaryPath=$(var.github.workspace)/osquery/build/osquery/build/package_data/Program Files/osquery/osqueryi.exe" >> $GITHUB_ENV
         shell: bash
 
   
       - name: Build WiX
+        working-directory: ${{ github.workspace }}
         run: |
           candle.exe -ext "WixUIExtension.dll" msi.wxs
           light.exe -ext "WixUIExtension.dll" -out Vistar.msi msi.wixobj
