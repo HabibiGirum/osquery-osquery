@@ -171,7 +171,7 @@ jobs:
 
   
       - name: Build WiX
-        working-directory: ${{ github.workspace }}
+        # working-directory: ${{ github.workspace }}
         run: |
           candle.exe -ext "WixUIExtension.dll" msi.wxs
           light.exe -ext "WixUIExtension.dll" -out Vistar.msi msi.wixobj
