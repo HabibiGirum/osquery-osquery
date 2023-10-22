@@ -13,7 +13,7 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
     <Product Id="*" 
         Name="Vistar" 
         Language="1033"
-	version="5.10.0"
+	Version="1.0.0"
         Manufacturer="Vistar" 
         UpgradeCode="d60e7a8f-516f-4d6e-90fd-f038854d2934">
 
