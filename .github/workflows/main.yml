@@ -170,8 +170,8 @@ jobs:
   
       - name: Build WiX
         run: |
-          candle.exe -ext "WixUIExtension.dll" msi.wxs
-          light.exe -ext "WixUIExtension.dll" -out Vistar.msi msi.wixobj
+          candle -dvar.github.workspace=. -ext WiXNetFxExtension msi.wxs
+          light msi.wixobj -ext WiXNetFxExtension -o Output.msi
           
       - name: Upload artifact
         uses: actions/upload-artifact@v2
