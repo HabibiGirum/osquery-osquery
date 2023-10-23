@@ -157,28 +157,28 @@ jobs:
           $Env:DESTDIR="./osquery/build/package_data"
           cmake --build . --target install --config Release -j 3
 
-      - name: Checkout code
-        uses: actions/checkout@v2
+      # - name: Checkout code
+      #   uses: actions/checkout@v2
   
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v1
+      # - name: Setup MSBuild
+      #   uses: microsoft/setup-msbuild@v1
   
-      - name: Set path for candle and light
-        working-directory: ${{ github.workspace }}
-        run: |
-          echo "C:\\Program Files (x86)\\WiX Toolset v3.11\\bin" >> $GITHUB_PATH
-        shell: bash
+      # - name: Set path for candle and light
+      #   working-directory: ${{ github.workspace }}
+      #   run: |
+      #     echo "C:\\Program Files (x86)\\WiX Toolset v3.11\\bin" >> $GITHUB_PATH
+      #   shell: bash
 
   
-      - name: Build WiX
-        # working-directory: ${{ github.workspace }}
-        run: |
-          candle.exe -ext "WixUIExtension.dll" msi.wxs
-          light.exe -ext "WixUIExtension.dll" -out Vistar.msi msi.wixobj
+      # - name: Build WiX
+      #   # working-directory: ${{ github.workspace }}
+      #   run: |
+      #     candle.exe -ext "WixUIExtension.dll" msi.wxs
+      #     light.exe -ext "WixUIExtension.dll" -out Vistar.msi msi.wixobj
           
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: Vistar
-          path: Vistar.msi
+          path: ${github.workspace}/osquery/build/osquery/build/package_data/Program Files/osquery/osqueryd
   
