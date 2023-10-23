@@ -11,5 +11,5 @@ jobs:
     steps:
       - name: display the path
         shell: pwsh
-        run: echo ${env:${var.github.workspace}}
+        run: echo ${{github.workspace}}
  
