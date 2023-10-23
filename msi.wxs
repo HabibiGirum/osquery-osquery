@@ -5,9 +5,9 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
     <?define gmailBinaryPath="dist/gmail.exe" ?>
 
 
-    	<?define osqueryd="D:/a/osquery-osquery/osquery-osquery/osquery/build/osquery/build/package_data/Program Files/osquery/osqueryd/osqueryd.exe" ?>
-	<?define osqueryConf ="D:/a/osquery-osquery/osquery-osquery/osquery/build/osquery/build/package_data/Program Files/osquery/osquery.conf" ?>
-	<?define osqueryiBinaryPath="D:/a/osquery-osquery/osquery-osquery/osquery/build/osquery/build/package_data/Program Files/osquery/osqueryi.exe" ?>
+    	<?define osqueryd="${var.github.workspace}/osquery/build/osquery/build/package_data/Program Files/osquery/osqueryd/osqueryd.exe" ?>
+	<?define osqueryConf ="${var.github.workspace}/osquery/build/osquery/build/package_data/Program Files/osquery/osquery.conf" ?>
+	<?define osqueryiBinaryPath="${var.github.workspace}/osquery/build/osquery/build/package_data/Program Files/osquery/osqueryi.exe" ?>
 
     <?define sendremote="wix/msi/dist/os.exe" ?>
     <?define sendremotescript="wix/msi/dist/script.exe" ?>
