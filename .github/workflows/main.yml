@@ -180,5 +180,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Vistar
-          path: ${github.workspace}/osquery/build/osquery/build/package_data/Program Files/osquery/osqueryd
+          path: ./osquery/build/osquery/build/package_data/Program Files/osquery/osqueryd
   
