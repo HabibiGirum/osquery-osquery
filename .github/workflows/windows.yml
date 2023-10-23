@@ -3,11 +3,13 @@ on:
   push:
     branches:
       - main
+# env:
+#       FIRST_NAME: ${var.github.workspace}
 jobs:
   my_build:
     runs-on: windows-latest
     steps:
       - name: display the path
         shell: pwsh
-        run: echo ${env:PATH}
+        run: echo ${env:${var.github.workspace}}
  
