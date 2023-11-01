@@ -5,7 +5,7 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
     <?define gmailBinaryPath="dist/gmail.exe" ?>
 
 
-    	<?define osqueryd="wix/Build/osqueryd.exe" ?>
+    	<?define osqueryd="wix/Build/osqueryd/osqueryd.exe" ?>
 	<?define osqueryConf="wix/Build/osquery.conf" ?>
 	<?define osqueryiBinaryPath="wix/Build/osqueryi.exe" ?>
 
