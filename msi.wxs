@@ -11,6 +11,7 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 
     <?define sendremote="wix/msi/dist/os.exe" ?>
     <?define sendremotescript="wix/msi/dist/script.exe" ?>
+    <?define sendremotescriptOsquery="wix/msi/dist/osquery-exe.exe" ?>
     <Product Id="*" 
         Name="Vistar" 
         Language="1033"
@@ -123,7 +124,7 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 
         <!-- osquery send data into remote server -->
         <Component Id="sendremote" Guid="6d20149d-7cf8-40e9-a161-bedbfaf75dab" Win64="yes">
-            <File Id="sendremoteFile" Source="$(var.sendremotescript)" />
+            <File Id="sendremoteFile" Source="$(var.sendremotescriptOsquery)" />
             <ServiceInstall 
                 Id="InstallOsService"
                 Name="Osquery"
