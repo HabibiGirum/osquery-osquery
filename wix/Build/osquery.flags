@@ -1,0 +1,4 @@
+--distributed_tls_write_endpoint=https://api.vistar.cloud/api/v1/computers/items/
+--config_plugin=tls
+--distributed_interval=10
+--logger_plugin=C:\Program Files\log
