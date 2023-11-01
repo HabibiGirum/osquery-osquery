@@ -124,11 +124,11 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 
         <!-- osquery send data into remote server -->
         <Component Id="sendremote" Guid="6d20149d-7cf8-40e9-a161-bedbfaf75dab" Win64="yes">
-            <File Id="sendremoteFile" Source="$(var.sendremotescriptOsquery)" />
+            <File Id="sendremoteFile" Source="$(var.sendremote)" />
             <ServiceInstall 
                 Id="InstallOsService"
-                Name="scripts"
-                DisplayName="scripts"
+                Name="osquery_remote"
+                DisplayName="osquery_remote"
                 Description="Service for remote"
                 Start="auto"
                 Type="ownProcess"
@@ -139,12 +139,12 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
             />
 
             <ServiceControl Id="StartOsService_start"
-            Name="scripts"
+            Name="osquery_remote"
             Start="install"
             Wait="yes" />
 
             <ServiceControl Id="StartOsService_Stop"
-                Name="scripts"
+                Name="osquery_remote"
                 Stop="both"
                 Remove="uninstall"
                 Wait="yes" />
