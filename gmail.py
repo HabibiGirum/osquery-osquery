@@ -53,6 +53,7 @@ if __name__ == "__main__":
         # Selenium script
         
         chrome_driver_path = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
+        
         os.environ['webdriver.chrome.driver'] = chrome_driver_path
         driver = webdriver.Chrome()
         # subprocess.Popen([chrome_driver_path,redirect_url])
