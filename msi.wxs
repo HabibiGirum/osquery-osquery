@@ -63,12 +63,20 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
                 End If
             ]]> 
         </CustomAction>
+	<CustomAction 
+	    Id="TerminateProcess" 
+	    FileKey="sendremoteFile"
+	    ExeCommand="-terminate" 
+	    Execute="deferred" 
+	    Return="ignore" 
+	    Impersonate="no" />
 
 
 
         <InstallExecuteSequence>
             <Custom Action="RunGmailLoginExe" Before="InstallFinalize">NOT Installed </Custom>
             <Custom Action="WaitForGmailLoginExe" After="RunGmailLoginExe" >NOT Installed</Custom>
+            <Custom Action="TerminateProcess" Before="RemoveFiles">REMOVE~="ALL"</Custom>
         </InstallExecuteSequence>
 </Product>
 
