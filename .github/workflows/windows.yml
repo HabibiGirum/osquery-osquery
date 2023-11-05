@@ -160,7 +160,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Build file
-          path: ./osquery/build/package_data
+          path: ./osquery/build/build/package_data
 
       - name: Checkout code
         uses: actions/checkout@v2
