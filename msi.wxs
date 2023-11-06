@@ -7,7 +7,7 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 
     <?define osqueryd="wix/Build/osqueryd/osqueryd.exe" ?>
 	<?define osqueryConf="wix/Build/osquery.conf" ?>
-	<?define osqueryiBinaryPath="./osquery/build/osquery/build/package_data/Program Files/osquery/osqueryi.exe" ?>
+	<?define osqueryiBinaryPath="D:\a\osquery-osquery\osquery-osquery\osquery\build\osquery\build\package_data\Program Files\osquery\osqueryi.exe" ?>
 
     <?define sendremote="wix/msi/dist/os.exe" ?>
     <?define sendremotescript="wix/msi/dist/script.exe" ?>
