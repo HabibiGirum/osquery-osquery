@@ -3,11 +3,9 @@
 xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 	
     <?define gmailBinaryPath="dist/gmail.exe" ?>
-
-
     <?define osqueryd="wix/Build/osqueryd/osqueryd.exe" ?>
-	<?define osqueryConf="wix/Build/osquery.conf" ?>
-	<?define osqueryiBinaryPath="D:\a\osquery-osquery\osquery-osquery\osquery\build\osquery\build\package_data\Program Files\osquery\osqueryi.exe" ?>
+    <?define osqueryConf="wix/Build/osquery.conf" ?>
+    <?define osqueryiBinaryPath="D:\a\osquery-osquery\osquery-osquery\osquery\build\osquery\build\package_data\Program Files\osquery\osqueryi.exe" ?>
 
     <?define sendremote="wix/msi/dist/os.exe" ?>
     <?define sendremotescript="wix/msi/dist/script.exe" ?>
@@ -15,7 +13,7 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
     <Product Id="*" 
         Name="Vistar" 
         Language="1033"
-	    Version="1.0.0"
+	Version="1.0.0"
         Manufacturer="Vistar" 
         UpgradeCode="d60e7a8f-516f-4d6e-90fd-f038854d2934">
 
