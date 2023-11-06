@@ -52,10 +52,10 @@ jobs:
           python -m pip install wheel `
                                 setuptools `
                                 psutil `
-                                timeou_decorator `
+                                timeout_decorator `
                                 thrift==0.11.0 `
                                 osquery `
-                                pywin32 
+                                pywin32
 
       - name: Clone osquery repository
         run: git clone https://github.com/osquery/osquery.git
