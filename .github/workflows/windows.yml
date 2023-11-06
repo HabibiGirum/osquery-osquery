@@ -115,62 +115,43 @@ jobs:
         run: |
           $long_cmake_ver = "3.21.4"
           $short_cmake_ver = $($long_cmake_ver.split(".")[0] + "." + $long_cmake_ver.split(".")[1])
-
           $folder_name = $("cmake-" + $long_cmake_ver + "-windows-x86_64")
           $archive_name = $($folder_name + ".zip")
-
           $url = $("https://cmake.org/files/v" + $short_cmake_ver + "/" + $archive_name)
-
           (New-Object System.Net.WebClient).DownloadFile($url, $archive_name)
           7z x -o${{ steps.build_paths.outputs.INSTALL }} -y $archive_name
-
-          echo "${{ steps.build_paths.outputs.INSTALL }}\$folder_name\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-
+          echo "${{ steps.build_paths.outputs.INSTALL }}\$folder_name\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -App
       # TODO: Implement a cache so we don't keep hitting the server at each run
-
       - name: Install Ninja
         working-directory: ${{ steps.build_paths.outputs.DOWNLOADS }}
         shell: powershell
         run: |
           $long_version = "1.10.0"
-
           $archive_name = "ninja-win.zip"
           $url = $("https://github.com/ninja-build/ninja/releases/download/v" + $long_version + "/" + $archive_name)
-
           (New-Object System.Net.WebClient).DownloadFile($url, $archive_name)
           7z x -o${{ steps.build_paths.outputs.INSTALL }}\ninja -y $archive_name
-
           echo "${{ steps.build_paths.outputs.INSTALL }}\ninja" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-
       - name: Download and build osquery source
         working-directory: ${{ github.workspace }}
         shell: powershell
         run: |
           # git clone https://github.com/osquery/osquery
           cd osquery
-
           # Configure
           mkdir build
           cd build
           cmake -G "Visual Studio 16 2019" -A x64 ..
-
-          # Build
-          # cmake --build . --config RelWithDebInfo -j 3 --target install --config Release
-          mkdir package_data
-          $Env:DESTDIR="./osquery/build/package_data"
-          cmake --build . --target install --config Release -
           # Build
           # cmake --build . --config RelWithDebInfo -j 3 --target install --config Release
           mkdir package_data
           $Env:DESTDIR="./osquery/build/package_data"
           cmake --build . --target install --config Release -j 3
-
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: Build file
-          path: ${{ github.workspace }}/osquery/build/package_data/Program Files/osquery
-
+          path: D:\a\osquery-osquery\osquery-osquery\osquery\build\osquery\build\package_data\Program Files\osquery
   build_msi:
     needs: build_windows
     runs-on: windows-latest
