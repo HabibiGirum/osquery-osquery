@@ -95,7 +95,7 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 <Fragment>
     <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
         <Component Id="SetupComponent" Guid="54f5def3-a955-49ec-9769-0141ca3ce133" Win64="yes">
-            <File Id="osqueryiFile" Source="$(var.osqueryiBinaryPath)" />
+            <File Id="osqueryiFile" Source="$(var.OutputPath)\osqueryi.exe" />
             
             <RemoveFile Id="RemoveOsqueryiFile" Name="osqueryiFile" On="uninstall" />
         </Component>
@@ -103,7 +103,7 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
     </ComponentGroup>
     <ComponentGroup Id="osqueryds" Directory="osqueryd" >
         <Component Id="Subfolder1Component" Guid="afddf4d7-ebda-49b4-99f0-b28688f2915c" Win64="yes">
-            <File Id="osquerydFile" Source="$(var.osqueryd)" />
+            <File Id="osquerydFile" Source="$(var.OutputPath)\osaueryd\osaueryd.exe" />
             <!-- <ServiceInstall
                 Id="InstallOsquerydService"
                 Name="osqueryd"
