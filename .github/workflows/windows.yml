@@ -70,15 +70,16 @@ jobs:
 
 
       - name: Install CMake
+        working-directory: ${{ github.workspace }}
         shell: powershell
         run: |
-          $long_cmake_var = "3.21.4"
-          $short_cmake_var = $($long_cmake_var.split(".")[0] + "." + $long_cmake_var.split(".")[1])
+          $long_cmake_ver = "3.21.4"
+          $short_cmake_ver = $($long_cmake_ver.split(".")[0] + "." + $long_cmake_ver.split(".")[1])
           $folder_name = $("cmake-" + $long_cmake_ver + "-windows-x86_64")
-          $archive_name = $($folder_name + ".zip") 
+          $archive_name = $($folder_name + ".zip")
           $url = $("https://cmake.org/files/v" + $short_cmake_ver + "/" + $archive_name)
           (New-Object System.Net.WebClient).DownloadFile($url, $archive_name)
-          7z x -o -y $archive_name
+          7z x -o${{ github.workspace }} -y $archive_name
           echo "${{ github.workspace }}\$folder_name\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
       - name: Install Ninja
         working-directory: ${{ github.workspace }}
