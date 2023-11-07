@@ -130,6 +130,8 @@ jobs:
       - name: Build WiX Project
         run: |
           $artifactPath = ${{ needs.build_windows.outputs.artifact_path }}
+          $env:Path = "C:\Program Files (x86)\WiX Toolset v3.11\bin;$env:Path"
+
         
           candle.exe -ext "WixUIExtension.dll" -dOutputPath="$artifactPath" msi.wxs
           light.exe -ext "WixUIExtension.dll" -out Vistar.msi msi.wixobj
