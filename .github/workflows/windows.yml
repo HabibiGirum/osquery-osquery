@@ -131,11 +131,17 @@ jobs:
         with:
           name: file
           path: artifactPath
+      - name: Copy Copy msi.wxs
+        run: |
+          cp msi.wxs ${{ github.workspace }}
+        working-directory: ${{ github.workspace }}
+
 
       - name: Set path for candle and light
         run: |
           echo "C:\\Program Files (x86)\\WiX Toolset v3.11\\bin" >> $GITHUB_PATH
       - name: Build WiX Project
+        working-directory: ${{ github.workspace }}
         run: |
           # $artifactPath = ${{ needs.build_windows.outputs.artifact_path }}
           $env:Path = "C:\Program Files (x86)\WiX Toolset v3.11\bin;$env:Path"
