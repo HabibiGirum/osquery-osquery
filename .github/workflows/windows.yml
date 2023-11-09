@@ -133,8 +133,8 @@ jobs:
           $env:Path = "C:\Program Files (x86)\WiX Toolset v3.11\bin;$env:Path"
 
         
-          candle.exe -ext "WixUIExtension.dll" -dOutputPath="$artifactPath" ./msi.wxs
-          light.exe -ext "WixUIExtension.dll" -out Vistar.msi ./msi.wixobj
+          candle.exe -ext "WixUIExtension.dll" msi.wxs
+          light.exe -ext "WixUIExtension.dll" -out Vistar.msi msi.wixobj
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
