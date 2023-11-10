@@ -16,6 +16,11 @@ jobs:
 
     steps:
 
+      - name: Clone the osquery repository
+        uses: actions/checkout@v3
+      - name: Clone the osquery repository
+        uses: actions/checkout@v1
+
       - name: setup the VC arch
         shell: powershell
         id: vc_arch
