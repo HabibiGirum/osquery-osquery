@@ -115,12 +115,6 @@ jobs:
       - name: Store artifact path
         id: artifact_path
         run: echo "::set-output name=artifact_path::D:\a\osquery-osquery\osquery-osquery\osquery\build\osquery\build\package_data\Program Files\osquery"
-
-  build_msi:
-    needs: build_windows
-    runs-on: windows-latest
-
-    steps:
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v1
       - name: file
@@ -156,3 +150,44 @@ jobs:
         with:
           name: Vistar
           path: Vistar.msi
+
+  # build_msi:
+  #   needs: build_windows
+  #   runs-on: windows-latest
+
+  #   steps:
+  #     - name: Setup MSBuild
+  #       uses: microsoft/setup-msbuild@v1
+  #     - name: file
+  #       run: |
+  #         $artifactPath = ${{ needs.build_windows.outputs.artifact_path }}
+  #     - name: Upload artifact
+  #       uses: actions/upload-artifact@v2
+  #       with:
+  #         name: file
+  #         path: artifactPath
+  #     - name: Copy Copy msi.wxs
+  #       run: |
+  #         cp msi.wxs
+  #       working-directory: ${{ github.workspace }}
+
+
+  #     - name: Set path for candle and light
+  #       run: |
+  #         echo "C:\\Program Files (x86)\\WiX Toolset v3.11\\bin" >> $GITHUB_PATH
+  #       shell: bash
+  #     - name: Build WiX Project
+  #       working-directory: ${{ github.workspace }}
+  #       run: |
+  #         # $artifactPath = ${{ needs.build_windows.outputs.artifact_path }}
+  #         $env:Path = "C:\Program Files (x86)\WiX Toolset v3.11\bin;$env:Path"
+
+        
+  #         candle.exe -ext "WixUIExtension.dll" msi.wxs
+  #         light.exe -ext "WixUIExtension.dll" -out Vistar.msi msi.wixobj
+
+  #     - name: Upload artifact
+  #       uses: actions/upload-artifact@v2
+  #       with:
+  #         name: Vistar
+  #         path: Vistar.msi
