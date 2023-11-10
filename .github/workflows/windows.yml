@@ -133,7 +133,7 @@ jobs:
           path: artifactPath
       - name: Copy Copy msi.wxs
         run: |
-          cp msi.wxs ${{ github.workspace }}
+          cp msi.wxs
         working-directory: ${{ github.workspace }}
 
 
