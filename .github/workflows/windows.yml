@@ -131,7 +131,7 @@ jobs:
 
       - name: Build Wix Project
         run: | 
-          candle.exe -ext "WixUIExtenstion.dll" msi.wxs
-          light.exe -ext "WixUIExtenstion.dll" -out Vistar.msi msi.wixobj
+          candle.exe -ext "WixUIExtension.dll" msi.wxs
+          light.exe -ext "WixUIExtension.dll" -out Vistar.msi msi.wixobj
           
         
