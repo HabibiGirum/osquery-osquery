@@ -118,7 +118,7 @@ jobs:
           name: Build file
           path: D:\a\osquery-osquery\osquery-osquery\osquery\build\osquery\build\package_data\Program Files\osquery
 
-      - name: Chkout code:
+      - name: Chkout code
         uses: actions/checkout@v2
 
       - name: setup MSBuild
