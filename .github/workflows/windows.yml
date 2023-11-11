@@ -114,8 +114,6 @@ jobs:
         with:
           name: Build file
           path: D:\a\osquery-osquery\osquery-osquery\osquery\build\osquery\build\package_data\Program Files\osquery
-      - name: Clone the osquery repository
-        uses: actions/checkout@v3
         
       - name: Chkout code
         uses: actions/checkout@v2
@@ -130,6 +128,8 @@ jobs:
         run: | 
           candle.exe -ext "WixUIExtension.dll" msi.wxs
           light.exe -ext "WixUIExtension.dll" -out "Vistar.msi" "msi.wixobj"
+        working-directory: ${{ github.workspace }}
+
         
       
           
