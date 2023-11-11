@@ -128,10 +128,13 @@ jobs:
         run: |
           echo "C:\\Program Files (x86)\\WiX Toolset v3.11\\bin" >> $GITHUB_PATH
         shell: bash
+        working-directory: ${{ github.workspace }}
 
       - name: Build Wix Project
         run: | 
           candle.exe -ext "WixUIExtension.dll" msi.wxs
-          light.exe -ext "WixUIExtension.dll" -out Vistar.msi msi.wixobj
+          light.exe -ext "WixUIExtension.dll" -out "Vistar.msi" "msi.wixobj"
+        working-directory: ${{ github.workspace }}
+      
           
         
