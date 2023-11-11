@@ -122,7 +122,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: setup MSBuild
-        uses: microsft/setup-msbuild@v1
+        uses: microsoft/setup-msbuild@v1
 
       - name: set path for candle and light
         run: |
