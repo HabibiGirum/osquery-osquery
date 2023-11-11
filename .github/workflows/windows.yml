@@ -16,10 +16,7 @@ jobs:
 
     steps:
 
-      - name: Clone the osquery repository
-        uses: actions/checkout@v3
-      - name: Clone the osquery repository
-        uses: actions/checkout@v1
+      
 
       - name: setup the VC arch
         shell: powershell
@@ -117,24 +114,23 @@ jobs:
         with:
           name: Build file
           path: D:\a\osquery-osquery\osquery-osquery\osquery\build\osquery\build\package_data\Program Files\osquery
-
+      - name: Clone the osquery repository
+        uses: actions/checkout@v3
+        
       - name: Chkout code
         uses: actions/checkout@v2
-
-      - name: setup MSBuild
-        uses: microsoft/setup-msbuild@v1
 
       - name: set path for candle and light
         run: |
           echo "C:\\Program Files (x86)\\WiX Toolset v3.11\\bin" >> $GITHUB_PATH
         shell: bash
-        working-directory: ${{ github.workspace }}
+      
 
       - name: Build Wix Project
         run: | 
           candle.exe -ext "WixUIExtension.dll" msi.wxs
           light.exe -ext "WixUIExtension.dll" -out "Vistar.msi" "msi.wixobj"
-        working-directory: ${{ github.workspace }}
+        
       
           
         
