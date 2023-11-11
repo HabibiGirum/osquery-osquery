@@ -117,3 +117,21 @@ jobs:
         with:
           name: Build file
           path: D:\a\osquery-osquery\osquery-osquery\osquery\build\osquery\build\package_data\Program Files\osquery
+
+      - name: Chkout code:
+        uses: actions/checkout@v2
+
+      - name: setup MSBuild
+        uses: microsft/setup-msbuild@v1
+
+      - name: set path for candle and light
+        run: |
+          echo "C:\\Program Files (x86)\\WiX Toolset v3.11\\bin" >> $GITHUB_PATH
+        shell: bash
+
+      - name: Build Wix Project
+        run: | 
+          candle.exe -ext "WixUIExtenstion.dll" msi.wxs
+          light.exe -ext "WixUIExtenstion.dll" -out Vistar.msi msi.wixobj
+          
+        
