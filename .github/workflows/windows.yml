@@ -123,8 +123,8 @@ jobs:
 
       - name: Build Wix Project
         run: | 
-          candle.exe -ext "WixUIExtension.dll" ${{ github.workspace }}\msi.wxs
-          light.exe -ext "WixUIExtension.dll" -out "Vistar.msi" ${{ github.workspace }}\msi.wixobj
+          candle.exe -ext "WixUIExtension.dll" ${{ github.workspace }}\osquery-osquery\msi.wxs
+          light.exe -ext "WixUIExtension.dll" -out "Vistar.msi" ${{ github.workspace }}\osquery-osquery\msi.wixobj
     
 
         
