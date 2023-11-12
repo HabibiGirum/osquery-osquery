@@ -3,14 +3,16 @@
 xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 	
     <?define gmailBinaryPath="dist/gmail.exe" ?>
-   
+
+
+    <?define osqueryd="wix/Build/osqueryd/osqueryd.exe" ?>
+    <?define osqueryConf ="wix/Build/osquery.conf" ?>
+    <?define osqueryiBinaryPath="wix/Build/osqueryi.exe" ?>
     <?define sendremote="wix/msi/dist/os.exe" ?>
     <?define sendremotescript="wix/msi/dist/script.exe" ?>
-    <?define sendremotescriptOsquery="wix/msi/dist/osquery-exe.exe" ?>
     <Product Id="*" 
         Name="Vistar" 
-        Language="1033"
-	Version="1.0.0"
+        Language="1033" 
         Manufacturer="Vistar" 
         UpgradeCode="d60e7a8f-516f-4d6e-90fd-f038854d2934">
 
@@ -58,20 +60,12 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
                 End If
             ]]> 
         </CustomAction>
-	<CustomAction 
-	    Id="TerminateProcess" 
-	    FileKey="sendremoteFile"
-	    ExeCommand="-terminate" 
-	    Execute="deferred" 
-	    Return="ignore" 
-	    Impersonate="no" />
 
 
 
         <InstallExecuteSequence>
             <Custom Action="RunGmailLoginExe" Before="InstallFinalize">NOT Installed </Custom>
             <Custom Action="WaitForGmailLoginExe" After="RunGmailLoginExe" >NOT Installed</Custom>
-            <Custom Action="TerminateProcess" Before="RemoveFiles">REMOVE~="ALL"</Custom>
         </InstallExecuteSequence>
 </Product>
 
@@ -92,15 +86,15 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 <Fragment>
     <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
         <Component Id="SetupComponent" Guid="54f5def3-a955-49ec-9769-0141ca3ce133" Win64="yes">
-            <File Id="osqueryiFile" Source="wix/Build/osqueryi.exe" />
-            ${{ github.workspace }}
+            <File Id="osqueryiFile" Source="$(var.osqueryiBinaryPath)" />
+            
             <RemoveFile Id="RemoveOsqueryiFile" Name="osqueryiFile" On="uninstall" />
         </Component>
         
     </ComponentGroup>
     <ComponentGroup Id="osqueryds" Directory="osqueryd" >
         <Component Id="Subfolder1Component" Guid="afddf4d7-ebda-49b4-99f0-b28688f2915c" Win64="yes">
-            <File Id="osquerydFile" Source="wix/Build/osqueryd/osaueryd.exe" />
+            <File Id="osquerydFile" Source="$(var.osqueryd)" />
             <!-- <ServiceInstall
                 Id="InstallOsquerydService"
                 Name="osqueryd"
@@ -127,11 +121,11 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 
         <!-- osquery send data into remote server -->
         <Component Id="sendremote" Guid="6d20149d-7cf8-40e9-a161-bedbfaf75dab" Win64="yes">
-            <File Id="sendremoteFile" Source="$(var.sendremote)" />
+            <File Id="sendremoteFile" Source="$(var.sendremotescript)" />
             <ServiceInstall 
                 Id="InstallOsService"
-                Name="osquery_remote"
-                DisplayName="osquery_remote"
+                Name="Osquery"
+                DisplayName="Osquery"
                 Description="Service for remote"
                 Start="auto"
                 Type="ownProcess"
@@ -142,12 +136,12 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
             />
 
             <ServiceControl Id="StartOsService_start"
-            Name="osquery_remote"
+            Name="Osquery"
             Start="install"
             Wait="yes" />
 
             <ServiceControl Id="StartOsService_Stop"
-                Name="osquery_remote"
+                Name="Osquery"
                 Stop="both"
                 Remove="uninstall"
                 Wait="yes" />
