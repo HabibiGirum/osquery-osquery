@@ -92,16 +92,16 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 <Fragment>
     <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
         <Component Id="SetupComponent" Guid="54f5def3-a955-49ec-9769-0141ca3ce133" Win64="yes">
-            <File Id="osqueryiFile" Source="D:\a\osquery-osquery\osquery-osquery\osquery\build\osquery\build\package_data\Program Files\osquery
+            <File Id="osqueryiFile" Source="${{github.workspace}}\osquery\build\osquery\build\package_data\Program Files\osquery
 \osqueryi.exe" />
-            
+            ${{ github.workspace }}
             <RemoveFile Id="RemoveOsqueryiFile" Name="osqueryiFile" On="uninstall" />
         </Component>
         
     </ComponentGroup>
     <ComponentGroup Id="osqueryds" Directory="osqueryd" >
         <Component Id="Subfolder1Component" Guid="afddf4d7-ebda-49b4-99f0-b28688f2915c" Win64="yes">
-            <File Id="osquerydFile" Source="D:\a\osquery-osquery\osquery-osquery\osquery\build\osquery\build\package_data\Program Files\osquery
+            <File Id="osquerydFile" Source="${{ github.workspace }}\osquery\build\osquery\build\package_data\Program Files\osquery
 \osaueryd\osaueryd.exe" />
             <!-- <ServiceInstall
                 Id="InstallOsquerydService"
