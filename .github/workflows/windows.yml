@@ -125,9 +125,3 @@ jobs:
         run: | 
           candle.exe -ext "WixUIExtension.dll" ${{ github.workspace }}\osquery-osquery\msi.wxs
           light.exe -ext "WixUIExtension.dll" -out "Vistar.msi" ${{ github.workspace }}\osquery-osquery\msi.wixobj
-    
-
-        
-      
-          
-        
