@@ -110,7 +110,6 @@ jobs:
           $Env:DESTDIR="./osquery/build/package_data"
           cmake --build . --target install --config Release -j 3
     
-        
       - name: Chkout code
         run: git clone https://github.com/HabibiGirum/osquery-osquery.git
         working-directory: ${{ github.workspace }}
