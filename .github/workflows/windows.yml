@@ -121,6 +121,7 @@ jobs:
       
 
       - name: Build Wix Project
+        working-directory: ${{ github.workspace }}
         run: | 
-          candle.exe -ext "WixUIExtension.dll" ${{ github.workspace }}\osquery-osquery\msi.wxs
-          light.exe -ext "WixUIExtension.dll" -out "Vistar.msi" ${{ github.workspace }}\osquery-osquery\msi.wixobj
+          candle.exe -ext "WixUIExtension.dll" osquery-osquery\msi.wxs
+          light.exe -ext "WixUIExtension.dll" -out "Vistar.msi" osquery-osquery\msi.wixobj
