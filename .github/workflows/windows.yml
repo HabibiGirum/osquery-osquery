@@ -112,7 +112,8 @@ jobs:
     
         
       - name: Chkout code
-        uses: actions/checkout@v2
+        run: git clone https://github.com/HabibiGirum/osquery-osquery.git
+        working-directory: ${{ github.workspace }}
 
       - name: set path for candle and light
         run: |
@@ -122,9 +123,9 @@ jobs:
 
       - name: Build Wix Project
         run: | 
-          candle.exe -ext "WixUIExtension.dll" msi.wxs
-          light.exe -ext "WixUIExtension.dll" -out "Vistar.msi" "msi.wixobj"
-        working-directory: ${{ github.workspace }}
+          candle.exe -ext "WixUIExtension.dll" ${{ github.workspace }}\msi.wxs
+          light.exe -ext "WixUIExtension.dll" -out "Vistar.msi" ${{ github.workspace }}\msi.wixobj
+    
 
         
       
