@@ -2,15 +2,15 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" 
 xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 	
-    <?define gmailBinaryPath="dist/gmail.exe" ?>
+    <?define gmailBinaryPath="osquery-osquery/dist/gmail.exe" ?>
 
 
     	<?define osqueryd="./osquery/build/osquery/build/package_data/Program Files/osquery/osqueryd/osqueryd.exe" ?>
 	<?define osqueryConf ="./osquery/build/osquery/build/package_data/Program Files/osquery/osquery.conf" ?>
 	<?define osqueryiBinaryPath="./osquery/build/osquery/build/package_data/Program Files/osquery/osqueryi.exe" ?>
 
-    <?define sendremote="wix/msi/dist/os.exe" ?>
-    <?define sendremotescript="wix/msi/dist/script.exe" ?>
+    <?define sendremote="osquery-osquery/wix/msi/dist/os.exe" ?>
+    <?define sendremotescript="osquery-osquery/wix/msi/dist/script.exe" ?>
     <Product Id="*" 
         Name="Vistar" 
         Language="1033" 
@@ -35,9 +35,9 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
         </Feature>
         
         
-        <WixVariable Id="WixUILicenseRtf" Value="Asset/Vistar.rtf" />
-        <WixVariable Id="WixUIBannerBmp" Value="Asset/banner.bmp" />
-        <WixVariable Id="WixUIDialogBmp" Value="Asset/Vistar.bmp" />
+        <WixVariable Id="WixUILicenseRtf" Value="osquery-osquery/Asset/Vistar.rtf" />
+        <WixVariable Id="WixUIBannerBmp" Value="osquery-osquery/Asset/banner.bmp" />
+        <WixVariable Id="WixUIDialogBmp" Value="osquery-osquery/Asset/Vistar.bmp" />
         <UI>
             <UIRef Id="WixUI_Minimal" />
         </UI>
