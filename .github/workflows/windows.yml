@@ -109,11 +109,7 @@ jobs:
           mkdir package_data
           $Env:DESTDIR="./osquery/build/package_data"
           cmake --build . --target install --config Release -j 3
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: Build file
-          path: D:\a\osquery-osquery\osquery-osquery\osquery\build\osquery\build\package_data\Program Files\osquery
+    
         
       - name: Chkout code
         uses: actions/checkout@v2
