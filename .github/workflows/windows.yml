@@ -125,3 +125,8 @@ jobs:
         run: | 
           candle.exe -ext "WixUIExtension.dll" osquery-osquery\msi.wxs
           light.exe -ext "WixUIExtension.dll" -out "Vistar.msi" msi.wixobj
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: Vistar
+          path: .\osquery-osquery\Vistar.msi
