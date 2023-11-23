@@ -4,7 +4,7 @@ name: Build MSI
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build:
