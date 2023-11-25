@@ -3,8 +3,6 @@ on:
   push:
     branches:
       - main
-
-
 jobs:
   build_windows:
     runs-on: ${{ matrix.os }}
