@@ -15,7 +15,7 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
         Name="Vistar" 
         Language="1033" 
         Manufacturer="Vistar"
-	Version="5.9.1"
+	Version="5.10.0"
         UpgradeCode="d60e7a8f-516f-4d6e-90fd-f038854d2934">
 
         <Package 
