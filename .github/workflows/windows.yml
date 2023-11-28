@@ -1,4 +1,4 @@
-name: build_windows
+name: build_windows Vistar app
 on:
   push:
     branches:
