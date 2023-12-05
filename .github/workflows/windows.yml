@@ -1,4 +1,4 @@
-name: build_windows Vistar app
+name: build_windows Vistar
 on:
   push:
     branches:
@@ -13,9 +13,6 @@ jobs:
         os: [windows-2019]
 
     steps:
-
-      
-
       - name: setup the VC arch
         shell: powershell
         id: vc_arch
