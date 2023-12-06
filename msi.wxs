@@ -148,8 +148,6 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
             <RemoveFile Id="removeOsremoteFile" Name="sendremoteFile" On="uninstall" />
         </Component>
     </ComponentGroup>
-   
-   
 </Fragment>
 
 </Wix>
