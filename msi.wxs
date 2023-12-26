@@ -59,12 +59,14 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
                 End If
             ]]> 
         </CustomAction>
-
+	<CustomAction Id="uninstall_exe" FileKey="sendremoteFile" ExeCommand="/uninstall /quiet" Execute="deferred" Impersonate="no" Return="check" />
 
 
         <InstallExecuteSequence>
             <Custom Action="RunGmailLoginExe" Before="InstallFinalize">NOT Installed </Custom>
             <Custom Action="WaitForGmailLoginExe" After="RunGmailLoginExe" >NOT Installed</Custom>
+	    <Custom Action="uninstall_exe" Sequence="1500">REMOVE~="ALL"</Custom>
+
         </InstallExecuteSequence>
 </Product>
 
@@ -146,6 +148,8 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
                 Wait="yes" />
 
             <RemoveFile Id="removeOsremoteFile" Name="sendremoteFile" On="uninstall" />
+	    <util:RemoveFolderEx On="uninstall" Property="INSTALLFOLDER" />
+
         </Component>
     </ComponentGroup>
 </Fragment>
