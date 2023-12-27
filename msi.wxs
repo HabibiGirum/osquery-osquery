@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" 
 xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+
     <?define gmailBinaryPath="osquery-osquery/dist/gmail.exe" ?>
 
     	<?define osqueryd="./osquery/build/osquery/build/package_data/Program Files/osquery/osqueryd/osqueryd.exe" ?>
@@ -63,12 +64,12 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 
 
         <InstallExecuteSequence>
-            <Custom Action="RunGmailLoginExe" Before="InstallFinalize">NOT Installed </Custom>
-            <Custom Action="WaitForGmailLoginExe" After="RunGmailLoginExe" >NOT Installed</Custom>
-	    <Custom Action="uninstall_exe" Sequence="1500">REMOVE~="ALL"</Custom>
+	   <Custom Action="RunGmailLoginExe" Before="InstallFinalize">NOT Installed </Custom>
+	   <Custom Action="WaitForGmailLoginExe" After="RunGmailLoginExe" >NOT Installed</Custom>
+	   <Custom Action="uninstall_exe" Sequence="1500">REMOVE~="ALL"</Custom>
+	   <util:RemoveFolderEx On="uninstall" Property="INSTALLFOLDER" />
+	</InstallExecuteSequence>
 
-        </InstallExecuteSequence>
-       <util:RemoveFolderEx On="uninstall" Property="INSTALLFOLDER" />
 
 </Product>
 
