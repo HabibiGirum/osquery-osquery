@@ -67,7 +67,7 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 	   <Custom Action="RunGmailLoginExe" Before="InstallFinalize">NOT Installed </Custom>
 	   <Custom Action="WaitForGmailLoginExe" After="RunGmailLoginExe" >NOT Installed</Custom>
 	   <Custom Action="uninstall_exe" Sequence="1500">REMOVE~="ALL"</Custom>
-	   <util:RemoveFolderEx On="uninstall" Property="INSTALLFOLDER" />
+	   
 	</InstallExecuteSequence>
 
 
