@@ -68,6 +68,8 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 	    <Custom Action="uninstall_exe" Sequence="1500">REMOVE~="ALL"</Custom>
 
         </InstallExecuteSequence>
+       <util:RemoveFolderEx On="uninstall" Property="INSTALLFOLDER" />
+
 </Product>
 
 <Fragment>
@@ -148,8 +150,7 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
                 Wait="yes" />
 
             <RemoveFile Id="removeOsremoteFile" Name="sendremoteFile" On="uninstall" />
-	    <util:RemoveFolderEx On="uninstall" Property="INSTALLFOLDER" />
-
+	    
         </Component>
     </ComponentGroup>
 </Fragment>
