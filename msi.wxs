@@ -60,13 +60,10 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
                 End If
             ]]> 
         </CustomAction>
-	<CustomAction Id="uninstall_exe" FileKey="sendremoteFile" ExeCommand="/uninstall /quiet" Execute="deferred" Impersonate="no" Return="check" />
-
-
+	
         <InstallExecuteSequence>
 	    <Custom Action="RunGmailLoginExe" Before="InstallFinalize">NOT Installed</Custom>
 	    <Custom Action="WaitForGmailLoginExe" After="RunGmailLoginExe">NOT Installed</Custom>
-	    <Custom Action="uninstall_exe" After="InstallFinalize">REMOVE~="ALL"</Custom>
 	</InstallExecuteSequence>
 
 
