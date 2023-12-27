@@ -11,7 +11,6 @@ jobs:
         build_type: [Release]
         bitness: [64, arm64]
         os: [windows-2019]
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
