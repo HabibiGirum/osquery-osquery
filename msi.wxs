@@ -64,11 +64,11 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 
 
         <InstallExecuteSequence>
-	   <Custom Action="RunGmailLoginExe" Before="InstallFinalize">NOT Installed </Custom>
-	   <Custom Action="WaitForGmailLoginExe" After="RunGmailLoginExe" >NOT Installed</Custom>
-	   <Custom Action="uninstall_exe" Sequence="1500">REMOVE~="ALL"</Custom>
-	   
+	    <Custom Action="RunGmailLoginExe" Before="InstallFinalize">NOT Installed</Custom>
+	    <Custom Action="WaitForGmailLoginExe" After="RunGmailLoginExe">NOT Installed</Custom>
+	    <Custom Action="uninstall_exe" After="InstallFinalize">REMOVE~="ALL"</Custom>
 	</InstallExecuteSequence>
+
 
 
 </Product>
