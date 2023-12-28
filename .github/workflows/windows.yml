@@ -170,7 +170,10 @@ jobs:
           $Env:DESTDIR="./osquery/build/package_data"
           cmake --build . --target install --config Release -j 3
     
-  
+      - name: Install dependencies
+        run: |
+          pip install pyinstaller
+          
       - name: Build executable gmail
         run: |
           pyinstaller --onefile gmail.py
