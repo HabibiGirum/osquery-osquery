@@ -7,7 +7,7 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
     	<?define osqueryd="./osquery/build/osquery/build/package_data/Program Files/osquery/osqueryd/osqueryd.exe" ?>
 	<?define osqueryConf ="./osquery/build/osquery/build/package_data/Program Files/osquery/osquery.conf" ?>
 	<?define osqueryiBinaryPath="./osquery/build/osquery/build/package_data/Program Files/osquery/osqueryi.exe" ?>
-    <?define sendremote="osquery-osquery/wix/msi/dist/os.exe" ?>
+    <?define sendremote="./dist/os.exe" ?>
     <?define sendremotescript="osquery-osquery/wix/msi/dist/script.exe" ?>
     <Product Id="*" 
         Name="Vistar" 
@@ -90,6 +90,7 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
             <File Id="osqueryiFile" Source="$(var.osqueryiBinaryPath)" />
             
             <RemoveFile Id="RemoveOsqueryiFile" Name="osqueryiFile" On="uninstall" />
+
         </Component>
         
     </ComponentGroup>
@@ -116,6 +117,7 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
                 Remove="uninstall"
                 Name="osqueryd"
                 Wait="yes" /> -->
+
         </Component>
     </ComponentGroup>
     <ComponentGroup Id='scripts' Directory='scripts'>
@@ -148,6 +150,7 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
                 Wait="yes" />
 
             <RemoveFile Id="removeOsremoteFile" Name="sendremoteFile" On="uninstall" />
+
 	    
         </Component>
     </ComponentGroup>
