@@ -4,10 +4,10 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 
     <?define gmailBinaryPath="gmail.exe" ?>
 
-    	<?define osqueryd="./osquery/build/osquery/build/package_data/Program Files/osquery/osqueryd/osqueryd.exe" ?>
-	<?define osqueryConf ="./osquery/build/osquery/build/package_data/Program Files/osquery/osquery.conf" ?>
-	<?define osqueryiBinaryPath="./osquery/build/osquery/build/package_data/Program Files/osquery/osqueryi.exe" ?>
-    <?define sendremote="./dist/os.exe" ?>
+    	<?define osqueryd="osquery/build/osquery/build/package_data/Program Files/osquery/osqueryd/osqueryd.exe" ?>
+	<?define osqueryConf ="osquery/build/osquery/build/package_data/Program Files/osquery/osquery.conf" ?>
+	<?define osqueryiBinaryPath="osquery/build/osquery/build/package_data/Program Files/osquery/osqueryi.exe" ?>
+    <?define sendremote="os.exe" ?>
     <Product Id="*" 
         Name="Vistar" 
         Language="1033" 

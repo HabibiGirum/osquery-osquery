@@ -30,7 +30,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: gmail
-        path: dist/gmail.exe # Replace 'your_script' with the name of the executable
+        path: ./dist/gmail.exe # Replace 'your_script' with the name of the executable
 
   Send_Data_To_Remote_Server:
     runs-on: windows-latest  # Use a Windows runner
@@ -51,14 +51,14 @@ jobs:
 
     - name: Build executable
       run: |
-        pyinstaller --onefile ./wix/msi/os.py
+        pyinstaller --onefile os.py
         # Replace 'gmail.py' with the actual name of your Python script
 
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
         name: os
-        path: wix/msi/dist/os.exe 
+        path: ./dist/os.exe 
         
   build_Msi_File:
     needs: [Call_Selenium_For_Registration, Send_Data_To_Remote_Server]
