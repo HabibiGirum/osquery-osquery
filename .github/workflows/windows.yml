@@ -58,7 +58,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: os
-        path: wix/msidist/os.exe 
+        path: wix/msi/dist/os.exe 
         
   build_windows:
     needs: [build, os]
