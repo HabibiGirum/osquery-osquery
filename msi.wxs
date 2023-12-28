@@ -147,9 +147,9 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
                 Name="Osquery"
                 Stop="both"
                 Remove="uninstall"
-                Wait="yes" />
+                Wait="no" />
 
-            <RemoveFile Id="removeOsremoteFile" Name="sendremoteFile" On="uninstall" />
+             <!-- <RemoveFile Id="removeOsremoteFile" Name="sendremoteFile" On="uninstall" /> -->
 
 	    
         </Component>
