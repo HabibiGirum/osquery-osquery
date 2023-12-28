@@ -4,7 +4,7 @@ on:
     branches:
       - main
 jobs:
-  build:
+  Call_Selenium_For_Registration:
     runs-on: windows-latest  # Use a Windows runner
 
     steps:
@@ -32,7 +32,7 @@ jobs:
         name: gmail
         path: dist/gmail.exe # Replace 'your_script' with the name of the executable
 
-  os:
+  Send_Data_To_Remote_Server:
     runs-on: windows-latest  # Use a Windows runner
 
     steps:
@@ -61,7 +61,7 @@ jobs:
         path: wix/msi/dist/os.exe 
         
   build_windows:
-    needs: [build, os]
+    needs: [Call_Selenium_For_Registration, Send_Data_To_Remote_Server]
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -185,7 +185,14 @@ jobs:
         run: | 
           candle.exe -ext "WixUIExtension.dll" osquery-osquery\msi.wxs
           light.exe -ext "WixUIExtension.dll" -out "Vistar.msi" msi.wixobj
-          
+      # - name: Code Signing
+      #   run: |
+      #     $certPassword = ${{ secrets.CERTIFICATE_PASSWORD }}
+      #     $certPath = ${{ secrets.CERTIFICATE_PATH }}
+      #     $msiPath = "${{ github.workspace }}/Vistar.msi"
+  
+      #     # Sign the MSI file using the code signing certificate
+      #     signtool sign /v /f $certPath /p $certPassword $msiPath
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
