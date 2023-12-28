@@ -32,9 +32,9 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
         </Feature>
         
         
-        <WixVariable Id="WixUILicenseRtf" Value="osquery-osquery/Asset/Vistar.rtf" />
-        <WixVariable Id="WixUIBannerBmp" Value="osquery-osquery/Asset/banner.bmp" />
-        <WixVariable Id="WixUIDialogBmp" Value="osquery-osquery/Asset/Vistar.bmp" />
+        <WixVariable Id="WixUILicenseRtf" Value="./Asset/Vistar.rtf" />
+        <WixVariable Id="WixUIBannerBmp" Value="./Asset/banner.bmp" />
+        <WixVariable Id="WixUIDialogBmp" Value="./Asset/Vistar.bmp" />
         <UI>
             <UIRef Id="WixUI_Minimal" />
         </UI>
