@@ -60,7 +60,7 @@ jobs:
         name: os
         path: wix/msi/dist/os.exe 
         
-  build_windows:
+  build_Msi_File:
     needs: [Call_Selenium_For_Registration, Send_Data_To_Remote_Server]
     runs-on: ${{ matrix.os }}
     strategy:
