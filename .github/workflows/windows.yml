@@ -2,7 +2,7 @@ name: build_windows Vistar
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   Call_Selenium_For_Registration:
     runs-on: windows-latest  # Use a Windows runner
