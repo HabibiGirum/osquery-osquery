@@ -1,6 +1,0 @@
-Log file created at: 2023/09/15 13:23:13
-Running on machine: DESKTOP-MRHP411
-Running duration (h:mm:ss): 0:00:00
-Log line format: [IWEF]yyyymmdd hh:mm:ss.uuuuuu threadid file:line] msg
-I0915 13:23:13.755043 10004 eventfactory.cpp:156] Event publisher not enabled: etw_process_publisher: etw_process_publisher publisher disabled via configuration.
-I0915 13:23:13.758913 10004 eventfactory.cpp:156] Event publisher not enabled: ntfs_event_publisher: NTFS event publisher disabled via configuration
