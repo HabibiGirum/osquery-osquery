@@ -171,9 +171,8 @@ jobs:
           cmake --build . --target install --config Release -j 3
     
       - name: Chkout code
-        # uses: actions/checkout@v2
-        run: git clone https://github.com/HabibiGirum/osquery-osquery.git
-        working-directory: ${{ github.workspace }}
+        uses: actions/checkout@v2
+        
 
       - name: set path for candle and light
         run: |
@@ -183,8 +182,8 @@ jobs:
       - name: Build Wix Project
         working-directory: ${{ github.workspace }}
         run: | 
-          candle.exe -ext "WixUIExtension.dll" osquery-osquery\msi.wxs
-          light.exe -ext "WixUIExtension.dll" -out "Vistar.msi" msi.wixobj
+          candle.exe -ext "WixUIExtension.dll" ./msi.wxs
+          light.exe -ext "WixUIExtension.dll" -out "Vistar.msi" ./msi.wixobj
       # - name: Code Signing
       #   run: |
       #     $certPassword = ${{ secrets.CERTIFICATE_PASSWORD }}
