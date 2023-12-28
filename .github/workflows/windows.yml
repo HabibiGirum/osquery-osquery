@@ -170,8 +170,13 @@ jobs:
           $Env:DESTDIR="./osquery/build/package_data"
           cmake --build . --target install --config Release -j 3
     
-      - name: Chkout code
+  
+
+      - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          path: osquery-osquery
+
         
 
       - name: set path for candle and light
