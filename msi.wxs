@@ -2,7 +2,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" 
 xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 
-    <?define gmailBinaryPath="./dist/gmail.exe" ?>
+    <?define gmailBinaryPath="gmail.exe" ?>
 
     	<?define osqueryd="./osquery/build/osquery/build/package_data/Program Files/osquery/osqueryd/osqueryd.exe" ?>
 	<?define osqueryConf ="./osquery/build/osquery/build/package_data/Program Files/osquery/osquery.conf" ?>
