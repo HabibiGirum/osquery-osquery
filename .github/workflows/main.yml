@@ -22,6 +22,9 @@ jobs:
       run: |
         pip install pyinstaller
         # Add any other dependencies your script might have
+    - name: install
+      run: |
+        pip install selenium
 
     - name: Build executable
       run: |
