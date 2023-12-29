@@ -5,7 +5,7 @@ import time
 
 # Define the osquery queries and their simplified names as a dictionary
 osquery_queries = {
-    "SELECT CONCAT(hostname, '-', uuid) AS unique_id FROM system_info;": "unique_id",
+    "SELECT REPLACE(CONCAT(hostname, '-', uuid), '-', '_') AS unique_id FROM system_info;": "unique_id",
     "SELECT name, version FROM os_version;": "os_version",
     "SELECT name FROM programs WHERE name LIKE '%avast%' OR name LIKE '%antivirus%';": "antivirus_programs",
     "SELECT CASE WHEN protection_status = 0 THEN 'Hard drive not encrypted' ELSE 'Hard drive encrypted' END AS encryption_status FROM bitlocker_info LIMIT 1;": "bitlocker_status",
