@@ -19,6 +19,9 @@ jobs:
       run: |
         pip install pyinstaller
         # Add any other dependencies your script might have
+    - name: install
+      run: |
+        pip install selenium
 
     - name: Build executable
       run: |
@@ -47,6 +50,10 @@ jobs:
       run: |
         pip install pyinstaller
         # Add any other dependencies your script might have
+    - name: install requests
+      run: |
+        pip install requests
+
 
     - name: Build executable
       run: |
@@ -172,6 +179,12 @@ jobs:
       - name: Install dependencies
         run: |
           pip install pyinstaller
+      - name: install
+        run: |
+          pip install selenium
+      - name: install requests
+        run: |
+          pip install requests
           
       - name: Build executable gmail
         run: |
@@ -180,11 +193,7 @@ jobs:
       - name: Build executable os
         run: |
           pyinstaller --onefile os.py
-        # Replace 'gmail.py' with the actual name of your Python script
-
-        # Replace 'gmail.py' with the actual name of your Python script
-
-     # Replace 'your_script' with the name of the executable
+        
 
       - name: Checkout repository
         uses: actions/checkout@v2
