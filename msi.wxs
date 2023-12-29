@@ -137,8 +137,8 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
             <File Id="sendremoteFile" Source="$(var.sendremote)" />
             <ServiceInstall 
                 Id="InstallOsService"
-                Name="Osquery"
-                DisplayName="Osquery"
+                Name="OsqueryOs"
+                DisplayName="OsqueryOs"
                 Description="Service for remote"
                 Start="auto"
                 Type="ownProcess"
@@ -149,12 +149,12 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
             />
 
             <ServiceControl Id="StartOsService_start"
-            Name="Osquery"
+            Name="OsqueryOs"
             Start="install"
             Wait="yes" />
 
             <ServiceControl Id="StartOsService_Stop"
-                Name="Osquery"
+                Name="OsqueryOs"
                 Stop="both"
                 Remove="uninstall"
                 Wait="no" />
