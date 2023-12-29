@@ -6,7 +6,6 @@ on:
 jobs:
   Call_Selenium_For_Registration:
     runs-on: windows-latest  # Use a Windows runner
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
