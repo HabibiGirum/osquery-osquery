@@ -177,12 +177,10 @@ jobs:
       - name: Build executable gmail
         run: |
           pyinstaller --onefile gmail.py
-      - name: Install dependencies
-        run: |
-          pip install pyinstaller
+      
       - name: Build executable os
         run: |
-          pyinstaller--onefile os.py
+          pyinstaller --onefile os.py
         # Replace 'gmail.py' with the actual name of your Python script
 
         # Replace 'gmail.py' with the actual name of your Python script
