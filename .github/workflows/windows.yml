@@ -6,6 +6,9 @@ on:
 jobs:
   Call_Selenium_For_Registration:
     runs-on: windows-latest  # Use a Windows runner
+
+    outputs:
+      call_selenium_output: ${{steps.gmail.outputs.call_selenium_output}}
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -24,6 +27,7 @@ jobs:
         pip install selenium
 
     - name: Build executable
+      id: gmail
       run: |
         pyinstaller --onefile gmail.py
         # Replace 'gmail.py' with the actual name of your Python script
@@ -36,7 +40,8 @@ jobs:
 
   Send_Data_To_Remote_Server:
     runs-on: windows-latest  # Use a Windows runner
-
+    outputs:
+      send_Data: ${{steps.Send.outputs.send_Data}}
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -56,6 +61,7 @@ jobs:
 
 
     - name: Build executable
+      id: Send
       run: |
         pyinstaller --onefile os.py
         # Replace 'gmail.py' with the actual name of your Python script
@@ -176,23 +182,27 @@ jobs:
           $Env:DESTDIR="./osquery/build/package_data"
           cmake --build . --target install --config Release -j 3
     
-      - name: Install dependencies
-        run: |
-          pip install pyinstaller
-      - name: install
-        run: |
-          pip install selenium
-      - name: install requests
-        run: |
-          pip install requests
+      # - name: Install dependencies
+      #   run: |
+      #     pip install pyinstaller
+      # - name: install
+      #   run: |
+      #     pip install selenium
+      # - name: install requests
+      #   run: |
+      #     pip install requests
           
-      - name: Build executable gmail
-        run: |
-          pyinstaller --onefile gmail.py
+      # - name: Build executable gmail
+      #   run: |
+      #     pyinstaller --onefile gmail.py
       
-      - name: Build executable os
+      # - name: Build executable os
+      #   run: |
+      #     pyinstaller --onefile os.py
+      - name: output from selenium and send data
         run: |
-          pyinstaller --onefile os.py
+          echo "${{ needs.Call_Selenium_For_Registration.outputs.call_selenium_output }}"
+          echo "${{ needs.Send_Data_To_Remote_Server.outputs.send_Data }}"
         
 
       - name: Checkout repository
