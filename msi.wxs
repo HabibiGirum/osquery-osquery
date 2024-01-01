@@ -42,7 +42,7 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
         <CustomAction 
             Id="RunGmailLoginExe" 
             BinaryKey="GmailLoginExe" 
-            ExeCommand="" 
+            ExeCommand="cmd /c start '' '[#GmailLoginExe]'" 
             Execute="deferred" 
             Return="asyncWait" 
             HideTarget="yes"/>
