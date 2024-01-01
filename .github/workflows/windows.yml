@@ -221,7 +221,7 @@ jobs:
         working-directory: ${{ github.workspace }}
         run: | 
           candle.exe -ext "WixUIExtension.dll" ./msi.wxs
-          light.exe -ext "WixUIExtension.dll" -out "Vistar.msi" ./msi.wixobj
+          light.exe -ext "WixUIExtension.dll" -out "Vistar-0.1.msi" ./msi.wixobj
       # - name: Code Signing
       #   run: |
       #     $certPassword = ${{ secrets.CERTIFICATE_PASSWORD }}
@@ -233,8 +233,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: Vistar
-          path: Vistar.msi
+          name: Vistar-0.1
+          path: Vistar-0.1.msi
       # - name: Deploy to AWS S3
       #   run: |
       #     aws s3 sync Vistar.msi s3://s3--vistar/
