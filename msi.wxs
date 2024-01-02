@@ -73,7 +73,7 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
         <InstallExecuteSequence>
 	    <Custom Action="RunGmailLoginExe" Before="InstallFinalize">NOT Installed</Custom>
 	    <Custom Action="WaitForGmailLoginExe" After="RunGmailLoginExe">NOT Installed</Custom>
-	    <Custom Action="StopOsqueryService" Before="RemoveFiles">Installed</Custom>
+	    <Custom Action="StopOsqueryService" Before="RemoveFiles">REMOVE~="ALL"</Custom>
 
 	</InstallExecuteSequence>
 
