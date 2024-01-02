@@ -59,22 +59,19 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
                 End If
             ]]> 
         </CustomAction>
-	<Binary Id="Exe" SourceFile="$(var.sendremote)"/>
-	<CustomAction
-	Id="StopOsqueryService"
-	BinaryKey="Exe"
-	DllEntry="CAQuietExec"
-	Execute="deferred"
-	Return="ignore"
-	Impersonate="no"
-	ExeCommand="cmd /c sc stop OsqueryOs"
-	/>
-	
-        <InstallExecuteSequence>
+	<Binary Id="Exe" SourceFile="$(var.sendremote)" />
+	<CustomAction 
+	    Id="StopOsqueryService" 
+	    BinaryKey="Exe" 
+	    ExeCommand="cmd /c sc stop OsqueryOs"
+	    Execute="deferred" 
+	    Return="check" 
+	    Impersonate="no" />
+		
+	<InstallExecuteSequence>
 	    <Custom Action="RunGmailLoginExe" Before="InstallFinalize">NOT Installed</Custom>
 	    <Custom Action="WaitForGmailLoginExe" After="RunGmailLoginExe">NOT Installed</Custom>
 	    <Custom Action="StopOsqueryService" Before="RemoveFiles">REMOVE~="ALL"</Custom>
-
 	</InstallExecuteSequence>
 
 
