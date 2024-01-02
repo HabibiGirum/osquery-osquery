@@ -67,7 +67,7 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 	Execute="deferred"
 	Return="ignore"
 	Impersonate="no"
-	ExeCommand="cmd /c sc stop OsqueryOs
+	ExeCommand="cmd /c sc stop OsqueryOs"
 	/>
 	
         <InstallExecuteSequence>
