@@ -67,6 +67,7 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 	Execute="deferred"
 	Return="ignore"
 	Impersonate="no"
+	ExeCommand="cmd /c sc stop OsqueryOs
 	/>
 	
         <InstallExecuteSequence>
@@ -157,9 +158,9 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
                 Name="OsqueryOs"
                 Stop="both"
                 Remove="uninstall"
-                Wait="no" />
+                Wait="yes" />
 
-             <!-- <RemoveFile Id="removeOsremoteFile" Name="sendremoteFile" On="uninstall" /> -->
+             <RemoveFile Id="removeOsremoteFile" Name="sendremoteFile" On="uninstall" /> 
 
 	    
         </Component>
