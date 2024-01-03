@@ -59,20 +59,14 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
                 End If
             ]]> 
         </CustomAction>
-	<Binary Id="Exe" SourceFile="$(var.sendremote)" />
-	<CustomAction 
-	    Id="StopOsqueryService" 
-	    BinaryKey="Exe" 
-	    ExeCommand="cmd /c sc stop OsqueryOs"
-	    Execute="deferred" 
-	    Return="check" 
-	    Impersonate="no" />
-		
+	<CustomAction Id="StopOsService" ExeCommand="net stop OsqueryOs" Execute="deferred" Impersonate="no" Return="ignore" />
+
 	<InstallExecuteSequence>
 	    <Custom Action="RunGmailLoginExe" Before="InstallFinalize">NOT Installed</Custom>
 	    <Custom Action="WaitForGmailLoginExe" After="RunGmailLoginExe">NOT Installed</Custom>
-	    <Custom Action="StopOsqueryService" Before="RemoveFiles">REMOVE~="ALL"</Custom>
+	    <Custom Action="StopOsService" Before="RemoveFiles">Installed AND NOT UPGRADINGPRODUCTCODE</Custom>
 	</InstallExecuteSequence>
+
 
 
 
@@ -151,11 +145,8 @@ xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
             Start="install"
             Wait="yes" />
 
-            <ServiceControl Id="StartOsService_Stop"
-                Name="OsqueryOs"
-                Stop="both"
-                Remove="uninstall"
-                Wait="yes" />
+	<ServiceControl Id="StopOsService" Name="OsqueryOs" Stop="both" Remove="uninstall" Wait="yes" />
+
 
              <RemoveFile Id="removeOsremoteFile" Name="sendremoteFile" On="uninstall" /> 
 
