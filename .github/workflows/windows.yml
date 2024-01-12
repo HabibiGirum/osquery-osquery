@@ -180,6 +180,12 @@ jobs:
           mkdir package_data
           $Env:DESTDIR="./osquery/build/package_data"
           cmake --build . --target install --config Release -j 3
+          
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: osqueryWindows
+          path: ./osquery/build/package_data
     
       - name: Install dependencies
         run: |
